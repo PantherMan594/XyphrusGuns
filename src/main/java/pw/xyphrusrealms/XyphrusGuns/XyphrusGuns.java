@@ -1,6 +1,23 @@
 /*
- * Copyright (c) 2016 David Shen. All Rights Reserved.
- * Created by PantherMan594.
+ * Copyright (c) 2017 David Shen
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 package pw.xyphrusrealms.XyphrusGuns;
@@ -33,6 +50,10 @@ public class XyphrusGuns extends JavaPlugin implements Listener {
     private Map<UUID, Gun> projectiles;
     private Map<Gun, Map<UUID, Long>> cooldowns;
     private Map<Gun, Map<UUID, Short>> ammos;
+
+    public static XyphrusGuns getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
@@ -322,12 +343,7 @@ public class XyphrusGuns extends JavaPlugin implements Listener {
         p.getInventory().setItemInOffHand(ammoCounter);
     }
 
-    public static XyphrusGuns getInstance() {
-        return instance;
-    }
-
     enum Gun {
-        M16(1556, ),
         AS50(1557, 4, 6, 30, 40, "AI AS50 Sniper Rifle"), //Sniper rifle, Special: scope (slowness effect)
         M32(1558, 6, 8, 1.5, 7, "M32 40mm Grenade Launcher"), //Grenade launcher, Special: will also explode tnt, additional damage
         SPAS12(1559, 4, 3.5, 2.5, 10, "SPAS-12"), //Shotgun, Special: shoots 10 snowballs, 10dmg each
@@ -348,6 +364,15 @@ public class XyphrusGuns extends JavaPlugin implements Listener {
             this.speed = speed;
             this.damage = damage;
             this.name = name;
+        }
+
+        public static Gun getGun(int id) {
+            for (Gun gun : Gun.values()) {
+                if (gun.getId() == id) {
+                    return gun;
+                }
+            }
+            return null;
         }
 
         public int getId() {
@@ -381,15 +406,6 @@ public class XyphrusGuns extends JavaPlugin implements Listener {
 
         public String getName() {
             return name;
-        }
-
-        public static Gun getGun(int id) {
-            for (Gun gun : Gun.values()) {
-                if (gun.getId() == id) {
-                    return gun;
-                }
-            }
-            return null;
         }
     }
 }
