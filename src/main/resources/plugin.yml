@@ -1,0 +1,5 @@
+name: XyphrusGuns
+main: pw.xyphrusrealms.XyphrusGuns.XyphrusGuns
+version: 0.1
+description: A plugin for XyphrusRealms by Evan Richardson and PantherMan594
+authors: [Evanticus, PantherMan594]
